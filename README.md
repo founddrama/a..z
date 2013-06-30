@@ -65,7 +65,7 @@ Or get really crazy:
 
 ### Tests!
 
-`a2z` has a bunch of node unit tests. You can run them:
+`a2z` has a bunch of [nodeunit](https://github.com/caolan/nodeunit) tests. You can run them:
 
     npm install && make test
 
