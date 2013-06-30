@@ -1,11 +1,18 @@
-var a2z = require('../main');
+var a2z  = require('../main');
+
+var ARITY_ERROR_MESSAGE = 'You must supply at least 1 argument to #range';
+var _1st_ARG_TYPE_ERROR = '1st argument to #range was an invalid type.';
+var _2nd_ARG_TYPE_ERROR = '2nd argument to #range was an invalid type.';
 
 module.exports = {
   
   'Basic test: "A" to "Z" gives back all letters A-Z.' : function(test) {
-    test.expect(1);
-    test.deepEqual(a2z.range('A', 'Z'), ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
-      'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']);
+    var alphabet = a2z.range('A', 'Z');
+    
+    test.expect(2);
+    test.deepEqual(alphabet, ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+      'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']);
+    test.equal(alphabet.length, 26);
     test.done();
   },
   
@@ -33,9 +40,41 @@ module.exports = {
     test.done();
   },
   
-  'ArityError: you must supply 2 arguments to getRange' : function(test) {
-    test.expect(3);
-    test.throws(function() { a2z.range(); }, 'You must supply at least 1 argument to getRange.');
+  'One argument: but that single argument is just an empty string and we throw an error.' : function(test) {
+    test.expect(1);
+    test.throws(function() { a2z.range(''); }, ARITY_ERROR_MESSAGE);
+    test.done();
+  },
+  
+  'Throw an error when the 1st argument is the wrong type.' : function(test) {
+    test.expect(7);
+    test.throws(function() { a2z.range(['A','r','r','a','y']); }, _1st_ARG_TYPE_ERROR);
+    test.throws(function() { a2z.range({'o':'b','j':'e','c':'t'}); }, _1st_ARG_TYPE_ERROR);
+    test.throws(function() { a2z.range(undefined); }, ARITY_ERROR_MESSAGE);
+    test.throws(function() { a2z.range(null); }, ARITY_ERROR_MESSAGE);
+    test.throws(function() { a2z.range(function(){}); }, _1st_ARG_TYPE_ERROR);
+    test.throws(function() { a2z.range(/regex/); }, _1st_ARG_TYPE_ERROR);
+    test.throws(function() { a2z.range(-1); }, _1st_ARG_TYPE_ERROR);
+    test.done();
+  },
+  
+  'Throw an error when the 2nd argument is the wrong type.' : function(test) {
+    test.expect(7);
+    test.throws(function() { a2z.range('A', ['A','r','r','a','y']); }, _2nd_ARG_TYPE_ERROR);
+    test.throws(function() { a2z.range('A', {'o':'b','j':'e','c':'t'}); }, _2nd_ARG_TYPE_ERROR);
+    test.doesNotThrow(function() { a2z.range('A', undefined); }, _2nd_ARG_TYPE_ERROR);
+    test.doesNotThrow(function() { a2z.range('A', null); }, _2nd_ARG_TYPE_ERROR);
+    test.throws(function() { a2z.range('A', function() {}); }, _2nd_ARG_TYPE_ERROR);
+    test.throws(function() { a2z.range('A', /regex/); }, _2nd_ARG_TYPE_ERROR);
+    test.throws(function() { a2z.range('A', -1); }, _1st_ARG_TYPE_ERROR);
+    test.done();
+  },
+  
+  'ArityError: you must supply 2 arguments to #range.' : function(test) {
+    test.expect(5);
+    test.throws(function() { a2z.range(); }, ARITY_ERROR_MESSAGE);
+    test.throws(function() { a2z.range(undefined); }, ARITY_ERROR_MESSAGE);
+    test.throws(function() { a2z.range(null); }, ARITY_ERROR_MESSAGE);
     test.doesNotThrow(function() { a2z.range(0); });
     test.doesNotThrow(function() { a2z.range(0, 0); });
     test.done();
@@ -45,6 +84,14 @@ module.exports = {
     test.expect(1);
     test.deepEqual(a2z.range('A', 'Z', function(n) { return n + 2; }), ['A', 'C', 'E', 'G', 'I',
       'K', 'M', 'O', 'Q', 'S', 'U', 'W', 'Y']);
+    test.done();
+  },
+  
+  'Providing a "whole string" as an argument just uses the first letter.' : function(test) {
+    test.expect(3);
+    test.deepEqual(a2z.range('foo', 'bar'), ['f', 'e', 'd', 'c', 'b']);
+    test.deepEqual(a2z.range('shenanigans'), ['s']);
+    test.deepEqual(a2z.range('x', 'zookeeper'), ['x', 'y', 'z']);
     test.done();
   }
   
