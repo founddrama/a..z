@@ -1,3 +1,4 @@
+/*jshint node:true */
 var a2z  = require('../main');
 
 var ARITY_ERROR_MESSAGE = 'You must supply at least 1 argument to #range';

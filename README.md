@@ -67,7 +67,10 @@ Or get really crazy:
 
 `a2z` has a bunch of [nodeunit](https://github.com/caolan/nodeunit) tests. You can run them:
 
-    npm install && make test
+    npm install && grunt nodeunit:all
+
+(BTW: If you haven't already, you should have [Grunt](http://gruntjs.com/)
+installed globally: `npm install -g grunt-cli`)
 
 ### License
 

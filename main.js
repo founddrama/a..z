@@ -1,3 +1,4 @@
+/*jshint curly:false, eqeqeq:false, node:true */
 function truish(x) {
   return x || x === 0;
 }
@@ -31,20 +32,20 @@ function getCharCode(c) {
  * reverse order.
  * @param stepFn {Function} OPTIONAL A function to determine how to advance
  * through the range.
- * @return range 
+ * @return range
  */
 function getRange(alpha, omega, stepFn) {
   if (!truish(alpha)) {
     throw new ArityError('You must supply at least 1 argument to #range.');
   }
   
-  if (!validateArgument(alpha)) throw new TypeError('1st argument to #range was an invalid type.')
+  if (!validateArgument(alpha)) throw new TypeError('1st argument to #range was an invalid type.');
     
   omega = truish(omega) ? omega : alpha;
 
   if (!validateArgument(omega)) throw new TypeError('2nd argument to #range was an invalid type.');
   
-  stepFn = typeof stepFn == 'function' ? stepFn : function(n) { return n + 1; }
+  stepFn = typeof stepFn == 'function' ? stepFn : function(n) { return n + 1; };
   
   var range = [];
   var alphaN = getCharCode(alpha);
