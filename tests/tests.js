@@ -4,6 +4,7 @@ var a2z  = require('../main');
 var ARITY_ERROR_MESSAGE = 'You must supply at least 1 argument to #range';
 var _1st_ARG_TYPE_ERROR = '1st argument to #range was an invalid type.';
 var _2nd_ARG_TYPE_ERROR = '2nd argument to #range was an invalid type.';
+var everyOtherFn        = function(n) { return n + 2; };
 
 module.exports = {
   
@@ -83,7 +84,7 @@ module.exports = {
   
   'Step Functions: given "A" to "Z", but every other letter.' : function(test) {
     test.expect(1);
-    test.deepEqual(a2z.range('A', 'Z', function(n) { return n + 2; }), ['A', 'C', 'E', 'G', 'I',
+    test.deepEqual(a2z.range('A', 'Z', everyOtherFn), ['A', 'C', 'E', 'G', 'I',
       'K', 'M', 'O', 'Q', 'S', 'U', 'W', 'Y']);
     test.done();
   },
@@ -94,6 +95,49 @@ module.exports = {
     test.deepEqual(a2z.range('shenanigans'), ['s']);
     test.deepEqual(a2z.range('x', 'zookeeper'), ['x', 'y', 'z']);
     test.done();
+  },
+
+  'Range DSL: "a..d" should give back letters "a" through "d".' : function(test) {
+    test.expect(1);
+    test.deepEqual(a2z.range('a..d'), ['a', 'b', 'c', 'd']);
+    test.done();
+  },
+
+  'Range DSL: "a..<d" should give back letters "a" through "c".' : function(test) {
+    test.expect(1);
+    test.deepEqual(a2z.range('a..<d'), ['a', 'b', 'c']);
+    test.done();
+  },
+
+  'Range DSL: "a..h" with a stepFn to skip every other letter.' : function(test) {
+    test.expect(1);
+    test.deepEqual(a2z.range('a..h', everyOtherFn), ['a', 'c', 'e', 'g']);
+    test.done();
+  },
+
+  'Range DSL: "a..<h" with a stepFn to skip every other letter.' : function(test) {
+    test.expect(1);
+    test.deepEqual(a2z.range('a..<h', everyOtherFn), ['a', 'c', 'e', 'g']);
+    test.done();
+  },
+
+  'Range DSL: ignore the 2nd argument if it is not a function.' : function(test) {
+    test.expect(7);
+    test.deepEqual(a2z.range('a..d', 'e..f'), ['a', 'b', 'c', 'd']);
+    test.deepEqual(a2z.range('a..<d', 'e..f'), ['a', 'b', 'c']);
+    test.deepEqual(a2z.range('a..d', 2), ['a', 'b', 'c', 'd']);
+    test.deepEqual(a2z.range('a..d', null), ['a', 'b', 'c', 'd']);
+    test.deepEqual(a2z.range('a..d', []), ['a', 'b', 'c', 'd']);
+    test.deepEqual(a2z.range('a..d', {}), ['a', 'b', 'c', 'd']);
+    test.deepEqual(a2z.range('a..d', /foo/), ['a', 'b', 'c', 'd']);
+    test.done();
+  },
+
+  'Range DSL: only process the first range in a string that looks like it contains multiple ranges.' : function(test) {
+    test.expect(3);
+    test.deepEqual(a2z.range('a..d..f'), ['a', 'b', 'c', 'd']);
+    test.deepEqual(a2z.range('a..d..f..z'), ['a', 'b', 'c', 'd']);
+    test.deepEqual(a2z.range('a..<d..f'), ['a', 'b', 'c']);
+    test.done();
   }
-  
 };

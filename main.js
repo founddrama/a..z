@@ -23,6 +23,20 @@ function getCharCode(c) {
   return typeof c == 'number' ? parseInt(c, 10) : c.charCodeAt(0);
 }
 
+function _getRangeWithDSL(rangeDSL, stepFn) {
+  var args = rangeDSL.split('..');
+
+  if (args[1].indexOf('<') === 0)
+    args[1] = args[1].slice(1).charCodeAt(0) - 1;
+
+  args = args.slice(0, 2);
+
+  if (typeof stepFn == 'function')
+    args.push(stepFn);
+
+  return getRange.apply(null, args);
+}
+
 /**
  * @param alpha {String|Number} REQUIRED A string or number. If a character,
  * that is the starting character for our range; if a number, that is the
@@ -35,15 +49,19 @@ function getCharCode(c) {
  * @return range
  */
 function getRange(alpha, omega, stepFn) {
-  if (!truish(alpha)) {
+  if (!truish(alpha))
     throw new ArityError('You must supply at least 1 argument to #range.');
-  }
   
-  if (!validateArgument(alpha)) throw new TypeError('1st argument to #range was an invalid type.');
+  if (!validateArgument(alpha))
+    throw new TypeError('1st argument to #range was an invalid type.');
+
+  if (alpha.toString().indexOf('..') > 0)
+    return _getRangeWithDSL(alpha, omega);
     
   omega = truish(omega) ? omega : alpha;
 
-  if (!validateArgument(omega)) throw new TypeError('2nd argument to #range was an invalid type.');
+  if (!validateArgument(omega))
+    throw new TypeError('2nd argument to #range was an invalid type.');
   
   stepFn = typeof stepFn == 'function' ? stepFn : function(n) { return n + 1; };
   

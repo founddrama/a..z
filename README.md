@@ -63,6 +63,14 @@ Or get really crazy:
     }()));
     //=> [ 'a', 'a', 'b', 'b' ];
 
+There's also a little `..` notation for creating the ranges, if you're into that
+sort of thing:
+
+    a2z.range('a..d');
+    //=> ['a', 'b', 'c', 'd']
+    a2z.range('a..<d');
+    //=> ['a', 'b', 'c']
+
 ### Tests!
 
 `a2z` has a bunch of [nodeunit](https://github.com/caolan/nodeunit) tests. You can run them:
