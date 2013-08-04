@@ -1,6 +1,6 @@
 {
   "name": "a2z",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "Rob Friesel <rob@founddrama.net>",
   "description": "A little library for creating string ranges.",
   "main": "./main",
