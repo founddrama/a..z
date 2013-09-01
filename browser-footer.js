@@ -1,0 +1,1 @@
+}(typeof exports === 'undefined' ? this['a2z']={} : exports));
