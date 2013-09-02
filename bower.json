@@ -1,6 +1,6 @@
 {
   "name": "a2z",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "main": "dist/a2z.min.js",
   "ignore": [
     "**/.*",
