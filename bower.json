@@ -1,0 +1,10 @@
+{
+  "name": "a2z-pages",
+  "version": "0.0.1",
+  "dependencies": {
+    "a2z": "~1.0.0",
+    "knockout": "~2.3.0"
+  },
+  "devDependencies": {},
+  "resolutions": {}
+}

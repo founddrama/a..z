@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>a2z : a tiny JavaScript library with character</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/a2z.css">
+</head>
+
+<body id="a2z">
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#a2z">a2z</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#api">API</a></li>
+      <li><a href="#obtaining">Obtaining</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+  </nav>
+
+  <section class="container">
+
+    <header class="jumbotron">
+      <div class="container">
+        <h1>a2z <small>a tiny JavaScript library with character</small></h1>
+        <blockquote>
+          <p class="lead"><code>a2z</code> is a tiny, self-contained JavaScript library for generating ranges of <del>letters</del> <ins>characters</ins>. Give it the start and end characters, and it spits out that range, as an array.</p>
+          <p class="lead"><code>a2z</code> has one exported function: <code>range</code>.</p>
+        </blockquote>
+      </div>
+    </header>
+
+    <h2 id="demo">Demo</h2>
+    <section class="row demo">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Try it:</h2>
+          </div>
+          <div class="panel-body">
+            <textarea name="a2zSource" id="a2zSource" rows="3" data-bind="value: a2zSource, valueUpdate: 'afterkeyup'"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel" data-bind="css: outputStatus">
+          <div class="panel-heading">
+            <h3 class="panel-title">Outputs:</h3>
+          </div>
+          <div class="panel-body" id="a2zOut" data-bind="html: a2zOut"></div>
+        </div>
+      </div>
+    </section>
+
+    <h2 id="api">API</h2>
+    <section>
+
+      <p class="lead"><strong>range</strong> <code>a2z.range(alpha, omega, stepFn)</code></p>
+
+      <p>Produces a <code>range</code> (an <code>Array</code>) starting with the character <code>alpha</code> and ending with <code>omega</code>. Optionally provide <code>stepFn</code> to alter the intervals between the letters in the produced <code>range</code>. If you provide a <code>stepFn</code>, it takes a single argument which is a <code>Number</code> and returns a <code>Number</code>.</p>
+
+    </section>
+
+    <h2 id="obtaining">Obtaining</h2>
+    <section class="row">
+      <div class="col-md-6">
+        <h3>Node</h3>
+        <p>In <a href="http://nodejs.org/">Node</a>:
+          <ol>
+            <li>Install with <code>npm</code>: <pre>npm install a2z</pre></li>
+            <li>Then just <code>require</code> the <code>a2z</code> package: <pre>var a2z = require('a2z');</pre></li>
+          </ol>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <h3>Bower</h3>
+        <p>In <a href="http://bower.io/">Bower</a>:
+          <ol>
+            <li>Install with <code>bower</code>: <pre>bower install a2z</pre></li>
+            <li>Then include the package as you normally would: <pre>&lt;script type="text/javascript" async src="components/a2z/dist/a2z.min.js"&gt;&lt;/script&gt;</pre></li>
+          </ol>
+        </p>
+      </div>
+    </section>
+    <section class="alert alert-info">
+      <p>You can also fork <strong>a2z</strong> on <a href="https://github.com/founddrama/a2z">Github</a>.</p>
+    </section>
+
+    <h2 id="examples">Examples</h2>
+    <section class="examples list-group">
+      <div class="row list-group-item">
+        <div class="col-md-6">
+          <p>Give it a single letter, and get that letter back out:</p>
+        </div>
+        <div class="col-md-6">
+          <pre>a2z.range('a');
+//=> ['a']</pre>
+        </div>
+      </div>
+      <div class="row list-group-item">
+        <div class="col-md-6">
+          <p>Give it a start an end letter, and you get all the letters in between:</p>
+        </div>
+        <div class="col-md-6">
+          <pre>a2z.range('a', 'd');
+//=> ['a', 'b', 'c', 'd']</pre>
+        </div>
+      </div>
+      <div class="row list-group-item">
+        <div class="col-md-6">
+          <p>Want the letters reversed? Just give them reversed:</p>
+        </div>
+        <div class="col-md-6">
+          <pre>a2z.range('Z', 'W');
+//=> ['Z', 'Y', 'X', 'W']</pre>
+        </div>
+      </div>
+      <div class="row list-group-item">
+        <div class="col-md-6">
+          <p>Give code points and get those characters out:</p>
+        </div>
+        <div class="col-md-6">
+          <pre>a2z.range(91, 94);
+//=> ['[', '\\', ']', '^']</pre>
+        </div>
+      </div>
+      <div class="row list-group-item">
+        <div class="col-md-6">
+          <p>Provide a step function as a third argument to skip letters:</p>
+        </div>
+        <div class="col-md-6">
+          <pre>a2z.range('A', 'J', function(c) { return c + 3; });
+//=> ['A', 'D', 'G', 'J']</pre>
+        </div>
+      </div>
+      <div class="row list-group-item">
+        <div class="col-md-6">
+          <p>Or get really crazy:</p>
+        </div>
+        <div class="col-md-6">
+          <pre>a2z.range('A', 'B', (function() {
+  var n = 0;
+  
+  return function(c) {
+    if (n < 1) {
+      n += 1;
+      return c;
+    } else {
+      n = 0;
+      return c + 1;
+    }
+  };
+}()));
+//=> [ 'a', 'a', 'b', 'b' ];</pre>
+        </div>
+      </div>
+      <div class="row list-group-item">
+        <div class="col-md-6">
+          <p>There's also a little <code>..</code> notation for creating the ranges, if you're into that sort of thing:</p>
+        </div>
+        <div class="col-md-6">
+          <pre>a2z.range('a..d');
+//=> ['a', 'b', 'c', 'd']
+a2z.range('a..&lt;d');
+//=> ['a', 'b', 'c']</pre>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p><strong>License:</strong> <code>a2z</code> is available for use under the <a href="http://opensource.org/licenses/MIT">MIT software license</a>.</p>
+      <p><code>a2z</code> by <a href="https://twitter.com/founddrama">@founddrama</a></p>
+    </footer>
+
+  </section>
+
+  <script type="text/javascript" src="components/a2z/dist/a2z.min.js"></script>
+  <script type="text/javascript" src="components/knockout/build/output/knockout-latest.js"></script>
+  <script type="text/javascript" src="js/a2z-view-model.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "a2z",
+  "version": "1.0.0",
+  "main": "dist/a2z.min.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "gitHead": "90e85c615aa2f949d72d01d6d038f94c9cef70e3",
+  "readme": "# a2z\n\n**`a2z`** is a tiny, self-contained JavaScript library for generating ranges of\n~~letters~~ _characters_. Give it the start and end characters, and it spits out\nthat range, as an array.\n\n`a2z` has one exported function: `range`.\n\n### API\n\n**range** `a2z.range(alpha, omega, stepFn)`\n\nProduces a `range` (an `Array`) starting with the character `alpha` and ending\nwith `omega`. Optionally provide `stepFn` to alter the intervals between the\nletters in the produced `range`. If you provide a `stepFn`, it takes a single\nargument which is a `Number` and returns a `Number`.\n\n#### Examples\n\nIn [Node](http://nodejs.org/), just require `a2z`:\n\n    var a2z = require('a2z');\n\nGive it a single letter, and get that letter back out:\n\n    a2z.range('a');\n    //=> ['a']\n\nGive it a start an end letter, and you get all the letters in between:\n\n    a2z.range('a', 'd');\n    //=> ['a', 'b', 'c', 'd']\n\nWant the letters reversed? Just give them reversed:\n\n    a2z.range('Z', 'W');\n    //=> ['Z', 'Y', 'X', 'W']\n\nGive code points and get those characters out:\n\n    a2z.range(91, 94);\n    //=> ['[', '\\\\', ']', '^']\n\nProvide a step function as a third argument to skip letters:\n\n    a2z.range('A', 'J', function(c) { return x + 3; });\n    //=> ['A', 'D', 'G', 'J']\n\nOr get really crazy:\n\n    a2z.range('A', 'B', (function() {\n      var n = 0;\n      \n      return function(c) {\n        if (n < 1) {\n          n += 1;\n          return c;\n        } else {\n          n = 0;\n          return c + 1;\n        }\n      };\n    }()));\n    //=> [ 'a', 'a', 'b', 'b' ];\n\nThere's also a little `..` notation for creating the ranges, if you're into that\nsort of thing:\n\n    a2z.range('a..d');\n    //=> ['a', 'b', 'c', 'd']\n    a2z.range('a..<d');\n    //=> ['a', 'b', 'c']\n\n### Tests!\n\n`a2z` has a bunch of [nodeunit](https://github.com/caolan/nodeunit) tests. You can run them:\n\n    npm install && grunt nodeunit:all\n\n(BTW: If you haven't already, you should have [Grunt](http://gruntjs.com/)\ninstalled globally: `npm install -g grunt-cli`)\n\n### License\n\n`a2z` is available for use under the [MIT software license](http://opensource.org/licenses/MIT).",
+  "readmeFilename": "README.md",
+  "_id": "a2z@1.0.0",
+  "description": "**`a2z`** is a tiny, self-contained JavaScript library for generating ranges of ~~letters~~ _characters_. Give it the start and end characters, and it spits out that range, as an array.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/founddrama/a2z.git"
+  }
+}

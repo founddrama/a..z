@@ -1,0 +1,38 @@
+body {
+  background-color: #eee;
+  padding-top: 70px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 276px;
+  }
+}
+
+.jumbotron {
+  background-color: #fff;
+}
+
+#a2zSource {
+  width: 100%;
+  font: 400 18px / 1.5em "Menlo" "Monaco" "Courier New" monospace;
+}
+
+#a2zOut {
+}
+
+.demo .panel {
+  min-height: 160px;
+}
+
+h2 {
+  padding-top: 70px;
+}
+
+.navbar-brand {
+  font-weight: 900;
+}
+
+footer {
+  text-align: center;
+}
