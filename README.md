@@ -15,11 +15,25 @@ with `omega`. Optionally provide `stepFn` to alter the intervals between the
 letters in the produced `range`. If you provide a `stepFn`, it takes a single
 argument which is a `Number` and returns a `Number`.
 
-#### Examples
+### Installing
 
-In [Node](http://nodejs.org/), just require `a2z`:
+In **[Node](http://nodejs.org/)** just install with `npm`:
+
+    npm install a2z
+
+Then simply require `a2z`:
 
     var a2z = require('a2z');
+
+Using **[Bower](http://bower.io)**, install it with `bower`:
+
+    bower install a2z
+
+Then simply include it like you normally would:
+
+    <script type="text/javascript" async src="components/a2z/dist/a2z.min.js"></script>
+
+#### Examples
 
 Give it a single letter, and get that letter back out:
 
@@ -43,7 +57,7 @@ Give code points and get those characters out:
 
 Provide a step function as a third argument to skip letters:
 
-    a2z.range('A', 'J', function(c) { return x + 3; });
+    a2z.range('A', 'J', function(c) { return c + 3; });
     //=> ['A', 'D', 'G', 'J']
 
 Or get really crazy:
