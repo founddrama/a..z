@@ -1,4 +1,4 @@
-# a2z
+# [a2z](http://founddrama.github.io/a2z/)
 
 **`a2z`** is a tiny, self-contained JavaScript library for generating ranges of
 ~~letters~~ _characters_. Give it the start and end characters, and it spits out
