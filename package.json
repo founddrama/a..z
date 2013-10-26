@@ -12,6 +12,9 @@
     "range",
     "string"
   ],
+  "scripts": {
+    "test":"grunt nodeunit:all"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt":                  "~0.4.1",
