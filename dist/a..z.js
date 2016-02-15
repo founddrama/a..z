@@ -82,4 +82,4 @@ function getRange(alpha, omega, stepFn) {
 }
 
 exports.range = getRange;
-}(typeof exports === 'undefined' ? this['a2z']={} : exports));
+}(typeof exports === 'undefined' ? this['a..z']={} : exports));

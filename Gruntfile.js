@@ -15,13 +15,13 @@ module.exports = function(grunt) {
     concat: {
       bower: {
         src: ['browser-header.js', 'main.js', 'browser-footer.js'],
-        dest: 'dist/a2z.js'
+        dest: 'dist/a..z.js'
       }
     },
     uglify: {
       bower: {
         files: {
-          'dist/a2z.min.js': ['dist/a2z.js']
+          'dist/a..z.min.js': ['dist/a..z.js']
         }
       }
     }

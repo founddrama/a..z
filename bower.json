@@ -1,7 +1,7 @@
 {
-  "name": "a2z",
-  "version": "1.0.0",
-  "main": "dist/a2z.min.js",
+  "name": "a..z",
+  "version": "1.1.0",
+  "main": "dist/a..z.min.js",
   "ignore": [
     "**/.*",
     "node_modules",
